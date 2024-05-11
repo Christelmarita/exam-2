@@ -1,4 +1,4 @@
-import { profileUrl } from "../../utils/constants";
+import { profileUrl } from "./constants.js";
 
 export async function getUserProfile() {
     const accessToken = localStorage.getItem('accessToken');
