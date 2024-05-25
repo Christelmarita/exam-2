@@ -1,13 +1,82 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+:root {
+  --primary: #fff;
+  --secondary: #287ABD;
+  --third: rgb(255, 239, 217);
+  --icons: #0e3555;
+  --detail: #B65907;
+  --lines: #15171f;
+
+  --headlineFont: 'Archivo Black', sans-serif;
+  --primaryFont: 'Nunito Sans', sans-serif;
+
+  --blur: backdrop-filter: blur(2px);
+  --radius: border-radius: 30px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button {
+  cursor: pointer;
+}
+body {
+  background-color: var(--primary);
+    font-family: var(--primaryFont);
+  margin: 0;
+  padding-top: 120px;
+  color: var(--icons);
+    font-size: 16px;
+  }
+  
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  color: var(--icons);
+  font-family: var(--primaryFont);
+}
+a {
+  text-decoration: none;
+  color: var(--icons);
+}
+
+b {
+  color: var(--detail);
+}
+
+h1 {
+  font-size: 2rem;
+  font-family: var(--headlineFont);
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+img {
+  max-width: 500px;
+  max-height: 400px;
+}
+
+input {
+  border: 0.8px solid var(--lines);
+  height: 40px;
+  width: 100%;
+  font-size: 1rem;
+  padding-left: 10px;
+  border-radius: 8px;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--secondary);
+}
+
+input::placeholder {
+  color: var(--secondary);
 }
