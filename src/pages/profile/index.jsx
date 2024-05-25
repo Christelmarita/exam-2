@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useUserProfile from '../../hooks/profileHook';
-import { useAuthContext } from "../../utils/authContext";
+import { useAuthContext } from '../../utils/authContext';
 import {
   PageContainer,
   PageContent,
-} from '../index.styles'; 
+} from '../index.styles';
 import {
   UserInfo,
   Avatar,
@@ -20,7 +20,7 @@ import {
   ButtonContainer,
   FormBtn,
   DeleteBtn,
-} from './index.styles'; 
+} from './index.styles';
 import deleteVenue from '../../utils/deleteVenue';
 
 const Profile = () => {
@@ -80,7 +80,7 @@ const Profile = () => {
                   <ListImage
                     src={booking.venue.media && booking.venue.media.length > 0 && booking.venue.media[0].url
                       ? booking.venue.media[0].url
-                      : 'default-placeholder-url'} 
+                      : 'default-placeholder-url'}
                     alt={booking.venue.name}
                   />
                   <ListDetails>
@@ -109,7 +109,7 @@ const Profile = () => {
                     <ListImage
                       src={venue.media && venue.media.length > 0 && venue.media[0].url
                         ? venue.media[0].url
-                        : 'default-placeholder-url'} 
+                        : 'default-placeholder-url'}
                       alt={venue.name}
                     />
                     <ListDetails>
@@ -120,6 +120,18 @@ const Profile = () => {
                       <FormBtn onClick={() => handleEdit(venue.id)}>Edit Venue</FormBtn>
                       <DeleteBtn onClick={() => handleDelete(venue.id)}>Delete Venue</DeleteBtn>
                     </ButtonContainer>
+                    {venue.bookings && venue.bookings.length > 0 && (
+                      <Section>
+                        <h3>Bookings for this venue</h3>
+                        <ul>
+                          {venue.bookings.map((booking) => (
+                            <li key={booking.id}>
+                              {booking.dateFrom} to {booking.dateTo} by {booking.customer?.name} ({booking.guests} guests)
+                            </li>
+                          ))}
+                        </ul>
+                      </Section>
+                    )}
                   </ListItem>
                 ))}
               </ListGrid>
