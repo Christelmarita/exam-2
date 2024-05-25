@@ -1,7 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import useUserProfile from '../../hooks/profileHook';
 import { useAuthContext } from '../../utils/authContext';
+import getMyVenue from '../../utils/getVenueBookings';
 import {
   PageContainer,
   PageContent,
@@ -17,8 +18,9 @@ import {
   ListImage,
   ListDetails,
   ListDates,
+  ListWrap,
   ButtonContainer,
-  FormBtn,
+  EditBtn,
   DeleteBtn,
 } from './index.styles';
 import deleteVenue from '../../utils/deleteVenue';
@@ -27,6 +29,26 @@ const Profile = () => {
   const { profileData, loading, error } = useUserProfile();
   const { user } = useAuthContext();
   const navigate = useNavigate();
+  const [venuesWithBookings, setVenuesWithBookings] = useState([]);
+
+  useEffect(() => {
+    const fetchVenuesWithBookings = async () => {
+      if (profileData && profileData.venues.length > 0) {
+        const venuesData = await Promise.all(
+          profileData.venues.map(async (venue) => {
+            const venueData = await getMyVenue(venue.id);
+            return {
+              ...venue,
+              bookings: venueData.bookings || [],
+            };
+          })
+        );
+        setVenuesWithBookings(venuesData);
+      }
+    };
+
+    fetchVenuesWithBookings();
+  }, [profileData]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -77,12 +99,14 @@ const Profile = () => {
             <ListGrid>
               {profileData.bookings.map((booking) => (
                 <ListItem key={booking.id}>
-                  <ListImage
-                    src={booking.venue.media && booking.venue.media.length > 0 && booking.venue.media[0].url
-                      ? booking.venue.media[0].url
-                      : 'default-placeholder-url'}
-                    alt={booking.venue.name}
-                  />
+                  <ListImage>
+                    <img
+                      src={booking.venue.media && booking.venue.media.length > 0 && booking.venue.media[0].url
+                        ? booking.venue.media[0].url
+                        : 'default-placeholder-url'}
+                      alt={booking.venue.name}
+                    />
+                  </ListImage>
                   <ListDetails>
                     <h3>{booking.venue.name}</h3>
                     <p>{booking.venue.location.address || "Unknown"}, {booking.venue.location.city || "Unknown"}, {booking.venue.location.country || "Unknown"}</p>
@@ -100,41 +124,36 @@ const Profile = () => {
         {profileData.venueManager && (
           <Section>
             <h2>My Venues</h2>
-            {profileData.venues.length === 0 ? (
+            {venuesWithBookings.length === 0 ? (
               <p>You have no venues.</p>
             ) : (
-              <ListGrid>
-                {profileData.venues.map((venue) => (
-                  <ListItem key={venue.id}>
-                    <ListImage
-                      src={venue.media && venue.media.length > 0 && venue.media[0].url
-                        ? venue.media[0].url
-                        : 'default-placeholder-url'}
-                      alt={venue.name}
-                    />
-                    <ListDetails>
-                      <h3>{venue.name}</h3>
-                      <p>{venue.location.address || "Unknown"}, {venue.location.city || "Unknown"}, {venue.location.country || "Unknown"}</p>
-                    </ListDetails>
-                    <ButtonContainer>
-                      <FormBtn onClick={() => handleEdit(venue.id)}>Edit Venue</FormBtn>
-                      <DeleteBtn onClick={() => handleDelete(venue.id)}>Delete Venue</DeleteBtn>
-                    </ButtonContainer>
-                    {venue.bookings && venue.bookings.length > 0 && (
-                      <Section>
-                        <h3>Bookings for this venue</h3>
-                        <ul>
-                          {venue.bookings.map((booking) => (
-                            <li key={booking.id}>
-                              {booking.dateFrom} to {booking.dateTo} by {booking.customer?.name} ({booking.guests} guests)
-                            </li>
-                          ))}
-                        </ul>
-                      </Section>
+              venuesWithBookings.map((venue) => (
+                <ListWrap>
+                <div key={venue.id}>
+                  <h3>Venue: {venue.name}</h3>
+                  <ButtonContainer>
+                    <EditBtn onClick={() => handleEdit(venue.id)}>Edit Venue</EditBtn>
+                    <DeleteBtn onClick={() => handleDelete(venue.id)}>Delete Venue</DeleteBtn>
+                  </ButtonContainer>
+                  <ListGrid>
+                    <ListItem>
+                      <strong>Customer</strong>
+                      <strong>Dates</strong>
+                    </ListItem>
+                    {venue.bookings.length === 0 ? (
+                      <p>No bookings for this venue.</p>
+                    ) : (
+                      venue.bookings.map((booking) => (
+                        <ListItem key={booking.id}>
+                          <span>{booking.customer.name}</span>
+                          <span>{new Date(booking.dateFrom).toLocaleDateString()} - {new Date(booking.dateTo).toLocaleDateString()}</span>
+                        </ListItem>
+                      ))
                     )}
-                  </ListItem>
-                ))}
-              </ListGrid>
+                  </ListGrid>
+                </div>
+                </ListWrap>
+              ))
             )}
           </Section>
         )}

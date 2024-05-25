@@ -3,77 +3,25 @@ import styled from 'styled-components';
 export const UserInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
-`;
-
-export const UserDetails = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Section = styled.section`
-  margin-top: 20px;
-  width: 100%;
-`;
-
-export const ListGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  width: 100%;
-
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-  }
-`;
-
-export const ListItem = styled.div`
-  display: flex;
-  align-items: center;
-  border: 0.8px solid rgba(0, 0, 0, 0.1);
-  height: 100%;
-  background-color: var(--third);
-`;
-
-export const ListImage = styled.img`
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-`;
-
-export const ListDetails = styled.div`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-
-  p{
-    font-size: 0.7rem;
-  }
-`;
-
-export const ListDates = styled.div`
-  margin-left: auto;
-  margin-right: 20px;
-  text-align: right;
+  margin-bottom: 2rem;
+  position: relative;
 `;
 
 export const Avatar = styled.div`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
   position: relative;
+  margin-right: 1rem;
+
   img {
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
   }
 `;
 
 export const VenueManagerMark = styled.div`
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0px;
+  right: 0px;
   width: 30px;
   height: 30px;
   background-color: var(--secondary);
@@ -86,34 +34,125 @@ export const VenueManagerMark = styled.div`
   text-align: center;
 `;
 
-export const DeleteBtn = styled.button`
-  padding: 10px 20px;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+export const UserDetails = styled.div`
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+  }
+  p {
+    margin: 0.5rem 0;
+  }
+`;
 
-  &:hover {
-    background-color: darkred;
+export const Section = styled.section`
+  margin-bottom: 2rem;
+`;
+
+export const ListGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+`;
+
+export const ListItem = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 0.5rem;
+  background: #f4f4f4;
+  border-radius: 4px;
+  align-items: center;
+
+  span {
+    word-wrap: break-word;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+`;
+
+export const ListWrap = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 0.5rem;
+  background: #f4f4f4;
+  border-radius: 4px;
+  align-items: center;
+  margin: 10px 0;
+
+  span {
+    display: block ruby;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+`;
+
+export const ListImage = styled.div`
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+`;
+
+export const ListDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  p {
+    margin: 0.25rem 0;
+  }
+`;
+
+export const ListDates = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+
+  p {
+    margin: 0;
   }
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 0.5rem;
 `;
 
-export const FormBtn = styled.button`
-  padding: 10px 20px;
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+export const EditBtn = styled.button`
+width: 150px;
+background-color: var(--detail);
+color: var(--primary);
+border: none;
+padding: 5px;
+margin: 10px 0;
+border-radius: 0px;
+cursor: pointer;
+
+&:hover {
+  background-color: var(--third);
+  color: var(--lines);
+  border: 0.8px solid var(--lines);
+}
+`;
+
+export const DeleteBtn = styled(EditBtn)`
+  background: #e74c3c;
 
   &:hover {
-    background-color: var(--primary-dark);
+    background: #c0392b;
+    color: var(--primary);
   }
 `;
