@@ -1,3 +1,5 @@
+// src/components/venueCard/index.jsx
+
 import React, { useState, useEffect } from "react";
 import getVenues from "../../utils/getVenues";
 import Loader from "../loader";
@@ -5,7 +7,7 @@ import { Text, CardBody, Card, Image } from "./index.styles";
 import Icons from "../../images";
 import { Link } from "react-router-dom";
 
-export default function VenueCard() {
+export default function VenueCard({ searchQuery }) {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,6 +27,12 @@ export default function VenueCard() {
     fetchVenues();
   }, []);
 
+  const filteredVenues = venues.filter(
+    (venue) =>
+      venue.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      venue.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (loading) {
     return <Loader />;
   }
@@ -35,7 +43,7 @@ export default function VenueCard() {
 
   return (
     <>
-      {venues.map(({ id, price, media, name, location }) => (
+      {filteredVenues.map(({ id, price, media, name, location }) => (
         <Link key={id} to={`/venue/${id}`}>
           <Card>
             <Image>

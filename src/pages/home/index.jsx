@@ -1,19 +1,21 @@
-import React from "react";
-import FilterForm from "../../components/forms/filterform";
-import { PageCardContainer, FilterContainer, PageHeader, PageContainer, PageContent } from "../index.styles";
+// src/pages/home/index.jsx
+
+import React, { useState } from "react";
+import { PageCardContainer, PageHeader, PageContainer, PageContent } from "../index.styles";
 import VenueCard from "../../components/venueCard";
+import SearchForm from "../../components/forms/searchform";
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
+
   return (
     <PageContainer>
       <PageContent>
         <PageHeader>
-          <FilterContainer>
-            <FilterForm />
-          </FilterContainer>
         </PageHeader>
+        <SearchForm setSearchQuery={setSearchQuery} />
         <PageCardContainer>
-          <VenueCard />
+          <VenueCard searchQuery={searchQuery} />
         </PageCardContainer>
       </PageContent>
     </PageContainer>
