@@ -1,10 +1,14 @@
 import React from "react";
-import { StyledFooter } from "./index.styles";
+import { Link } from "react-router-dom";
+import { StyledFooter, FooterContent } from "./index.styles";
 
 export default function Footer() {
   return (
     <StyledFooter>
-      Footer
+      <FooterContent>
+        <Link to="/">Home</Link>
+        <p>&copy; 2024 Christel Østerbøe</p>
+      </FooterContent>
     </StyledFooter>
   );
 }

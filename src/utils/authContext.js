@@ -24,10 +24,11 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(userData));
   };
 
-  const logout = () => {
+  const logout = (navigate) => {
     setUser(null);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    navigate("/"); // Redirect to home page after logout
   };
 
   return (

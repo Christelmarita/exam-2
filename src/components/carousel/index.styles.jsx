@@ -23,7 +23,6 @@ export const CarouselContainer = styled.div`
   .slick-dots {
     display: flex !important;
     justify-content: left;
-    margin: 10px 0 20px 0;
   
   }
 

@@ -22,14 +22,19 @@ import {
   ButtonContainer,
   EditBtn,
   DeleteBtn,
+  UploadInput,
+  UploadButton,
 } from './index.styles';
 import deleteVenue from '../../utils/deleteVenue';
+import uploadAvatar from '../../utils/uploadAvatar';
 
 const Profile = () => {
-  const { profileData, loading, error } = useUserProfile();
+  const { profileData, loading, error, refetch } = useUserProfile();
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const [venuesWithBookings, setVenuesWithBookings] = useState([]);
+  const [avatarUrl, setAvatarUrl] = useState('');
+  const [uploadError, setUploadError] = useState('');
 
   useEffect(() => {
     const fetchVenuesWithBookings = async () => {
@@ -77,6 +82,26 @@ const Profile = () => {
     }
   };
 
+  const handleAvatarChange = (e) => {
+    setAvatarUrl(e.target.value);
+  };
+
+  const handleAvatarUpload = async () => {
+    if (!avatarUrl) return;
+    setUploadError(''); // Clear previous error message
+    console.log("User Access Token:", user.accessToken);
+    console.log("Profile Name:", profileData.name);
+    console.log("Avatar URL:", avatarUrl);
+    try {
+      await uploadAvatar(user.accessToken, localStorage.getItem("apiKey"), profileData.name, avatarUrl);
+      alert('Avatar updated successfully');
+      window.location.reload(); // Reload the page
+    } catch (error) {
+      setUploadError(error.message);
+    }
+  };
+  
+
   return (
     <PageContainer>
       <PageContent>
@@ -90,6 +115,9 @@ const Profile = () => {
             <p>{profileData.bio || 'No bio available'}</p>
           </UserDetails>
         </UserInfo>
+        <UploadInput type="text" placeholder="New Avatar URL" onChange={handleAvatarChange} />
+        <UploadButton onClick={handleAvatarUpload}>Upload New Avatar</UploadButton>
+        {uploadError && <p style={{ color: 'red' }}>{uploadError}</p>}
 
         <Section>
           <h2>My Bookings</h2>
@@ -109,7 +137,9 @@ const Profile = () => {
                   </ListImage>
                   <ListDetails>
                     <h3>{booking.venue.name}</h3>
-                    <p>{booking.venue.location.address || "Unknown"}, {booking.venue.location.city || "Unknown"}, {booking.venue.location.country || "Unknown"}</p>
+                    <p>
+                      {booking.venue.location.address || "Unknown"}, {booking.venue.location.city || "Unknown"}, {booking.venue.location.country || "Unknown"}
+                    </p>
                   </ListDetails>
                   <ListDates>
                     <p>From: {new Date(booking.dateFrom).toLocaleDateString()}</p>
@@ -128,30 +158,30 @@ const Profile = () => {
               <p>You have no venues.</p>
             ) : (
               venuesWithBookings.map((venue) => (
-                <ListWrap>
-                <div key={venue.id}>
-                  <h3>Venue: {venue.name}</h3>
-                  <ButtonContainer>
-                    <EditBtn onClick={() => handleEdit(venue.id)}>Edit Venue</EditBtn>
-                    <DeleteBtn onClick={() => handleDelete(venue.id)}>Delete Venue</DeleteBtn>
-                  </ButtonContainer>
-                  <ListGrid>
-                    <ListItem>
-                      <strong>Customer</strong>
-                      <strong>Dates</strong>
-                    </ListItem>
-                    {venue.bookings.length === 0 ? (
-                      <p>No bookings for this venue.</p>
-                    ) : (
-                      venue.bookings.map((booking) => (
-                        <ListItem key={booking.id}>
-                          <span>{booking.customer.name}</span>
-                          <span>{new Date(booking.dateFrom).toLocaleDateString()} - {new Date(booking.dateTo).toLocaleDateString()}</span>
-                        </ListItem>
-                      ))
-                    )}
-                  </ListGrid>
-                </div>
+                <ListWrap key={venue.id}>
+                  <div>
+                    <h3>{venue.name}</h3>
+                    <ButtonContainer>
+                      <EditBtn onClick={() => handleEdit(venue.id)}>Edit Venue</EditBtn>
+                      <DeleteBtn onClick={() => handleDelete(venue.id)}>Delete Venue</DeleteBtn>
+                    </ButtonContainer>
+                    <ListGrid>
+                      <ListItem>
+                        <strong>Customer</strong>
+                        <strong>Dates</strong>
+                      </ListItem>
+                      {venue.bookings.length === 0 ? (
+                        <p>No bookings for this venue.</p>
+                      ) : (
+                        venue.bookings.map((booking) => (
+                          <ListItem key={booking.id}>
+                            <span>{booking.customer.name}</span>
+                            <span>{new Date(booking.dateFrom).toLocaleDateString()} - {new Date(booking.dateTo).toLocaleDateString()}</span>
+                          </ListItem>
+                        ))
+                      )}
+                    </ListGrid>
+                  </div>
                 </ListWrap>
               ))
             )}

@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuthContext } from '../../utils/authContext';
-import useUserProfile from '../../hooks/profileHook'; // Correct import for the default export
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../utils/authContext";
+import useUserProfile from "../../hooks/profileHook";
 import {
   NavContent,
   Nav,
   RightContent,
   Hamburger,
   MobileMenu,
-} from './index.styles';
-import { toTitleCase } from '../../utils/toTitleCase';
+} from "./index.styles";
 
 export default function Navigation() {
   const { user, logout } = useAuthContext();
   const { profileData, loading, error } = useUserProfile();
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleScroll = () => {
     const offset = window.scrollY;
@@ -23,9 +23,9 @@ export default function Navigation() {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -37,7 +37,7 @@ export default function Navigation() {
   if (error) return <div>Error loading profile data.</div>;
 
   return (
-    <Nav className={scrolled ? 'scrolled' : ''}>
+    <Nav className={scrolled ? "scrolled" : ""}>
       <NavContent>
         <Link to="/">
           <div className="logo-container">
@@ -61,10 +61,10 @@ export default function Navigation() {
               )}
               <Link to="/profile">
                 <button>
-                  <p>{toTitleCase(user.name)}</p>
+                  <p>Profile</p>
                 </button>
               </Link>
-              <button onClick={logout}>
+              <button onClick={() => logout(navigate)}>
                 <p>Log out</p>
               </button>
             </>
@@ -90,10 +90,10 @@ export default function Navigation() {
               )}
               <Link to="/profile" onClick={toggleMobileMenu}>
                 <button>
-                  <p>{toTitleCase(user.name)}</p>
+                  <p>Profile</p>
                 </button>
               </Link>
-              <button onClick={() => { logout(); toggleMobileMenu(); }}>
+              <button onClick={() => { logout(navigate); toggleMobileMenu(); }}>
                 <p>Log out</p>
               </button>
             </>

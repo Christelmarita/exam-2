@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../utils/authContext";
 import AuthForm from "../authForm";
 import { login as loginUserService } from "../../../utils/authService";
@@ -12,13 +12,16 @@ const initialLoginState = {
 const LoginForm = () => {
   const { login: loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation(); // Get the current location
 
   const handleLogin = async (formData) => {
     const { email, password } = formData;
     try {
       const userData = await loginUserService(email, password);
       loginUser(userData);
-      navigate("/");
+
+      const redirectTo = location.state?.from || "/";
+      navigate(redirectTo);
     } catch (error) {
       alert(error.message);
     }

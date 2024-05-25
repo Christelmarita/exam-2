@@ -56,7 +56,6 @@ width: 100%;
 
 `;
 export const FormHeader = styled.div`
-margin-top: 30px;
 width: 100%;
 max-width: 500px;
 h1{

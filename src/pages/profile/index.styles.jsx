@@ -14,6 +14,7 @@ export const Avatar = styled.div`
   img {
     width: 100px;
     height: 100px;
+    object-fit: cover;
     border-radius: 50%;
   }
 `;
@@ -45,7 +46,7 @@ export const UserDetails = styled.div`
 `;
 
 export const Section = styled.section`
-  margin-bottom: 2rem;
+  margin: 2rem 0;
 `;
 
 export const ListGrid = styled.div`
@@ -61,7 +62,6 @@ export const ListItem = styled.div`
   gap: 1rem;
   padding: 0.5rem;
   background: #f4f4f4;
-  border-radius: 4px;
   align-items: center;
 
   span {
@@ -79,7 +79,6 @@ export const ListWrap = styled.div`
   gap: 1rem;
   padding: 0.5rem;
   background: #f4f4f4;
-  border-radius: 4px;
   align-items: center;
   margin: 10px 0;
 
@@ -97,7 +96,6 @@ export const ListImage = styled.div`
     width: 100px;
     height: 100px;
     object-fit: cover;
-    border-radius: 4px;
   }
 `;
 
@@ -154,5 +152,24 @@ export const DeleteBtn = styled(EditBtn)`
   &:hover {
     background: #c0392b;
     color: var(--primary);
+  }
+`;
+
+export const UploadInput = styled.input`
+  margin-top: 10px;
+  display: block;
+  width: 250px;
+`;
+
+export const UploadButton = styled.button`
+  margin-top: 10px;
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--detail);
   }
 `;

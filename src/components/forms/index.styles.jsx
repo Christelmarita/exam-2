@@ -230,13 +230,9 @@ export const NavSearch = styled.div`
   }
 `;
 
-export const PageCardContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px;
-
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
+export const LoginPrompt = styled.p`
+  color: red;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 1rem;
 `;
