@@ -84,11 +84,39 @@ export const FormSearch = styled.form`
   justify-content: center;
   margin: 5% auto;
   gap: 10px;
+  padding: 0 10px;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  input[type="text"] {
+    border: 0.8px solid var(--lines);
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    padding: 0 10px;
+    border-radius: 8px;
+
+    &:focus {
+      outline: none;
+      border-color: var(--secondary);
+    }
+
+    &::placeholder {
+      color: var(--secondary);
+    }
+  }
 
   img {
     height: 20px;
     position: absolute;
-    right: 10px;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
   }
