@@ -73,6 +73,7 @@ export default function EditVenueForm() {
         }
       } catch (error) {
         console.error('Error fetching venue:', error);
+        setError('Failed to fetch venue');
       } finally {
         setLoading(false);
       }
@@ -134,6 +135,7 @@ export default function EditVenueForm() {
     } catch (error) {
       console.error('Error:', error);
       setMessage({ success: false, message: error.message });
+      setError('Failed to update venue');
     } finally {
       setLoading(false);
     }
@@ -143,6 +145,8 @@ export default function EditVenueForm() {
     <div>
       <h1>Edit Venue</h1>
       <Form onSubmit={handleSubmit}>
+        {loading && <p>Loading...</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <FormGridContainer>
           <FormColumn>
             <h2>Where</h2>

@@ -39,7 +39,7 @@ const initialState = {
  * @returns {JSX.Element}
  */
 const AddVenueForm = () => {
-  const { performFetch, loading, error, data } = useFetch(createVenueUrl);
+  const { performFetch} = useFetch(createVenueUrl);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
