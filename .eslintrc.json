@@ -1,11 +1,13 @@
 {
     "env": {
+        "jest": true,
         "browser": true,
-        "es2021": true
+        "es6": true,
+        "node": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
+        "react-app",
+        "react-app/jest"
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -15,5 +17,14 @@
         "react"
     ],
     "rules": {
-    }
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "off"
+    },
+    "settings": {
+        "react": {
+          "version": "detect"
+        }
+      }
 }
+
+  
