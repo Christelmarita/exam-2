@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Form = styled.form`
   display: flex;
@@ -46,7 +46,6 @@ export const FormItem = styled.div`
   }
 `;
 
-
 export const FormBtnContainer = styled.div`
   margin: 20px 0;
 `;
@@ -54,9 +53,9 @@ export const FormBtnContainer = styled.div`
 export const FormItemCheckbox = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px; 
+  gap: 10px;
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     appearance: none;
     width: 20px;
     height: 20px;
@@ -91,7 +90,7 @@ export const FormSearch = styled.form`
     position: absolute;
     right: 10px;
     top: 50%;
-    transform: translateY(-50%); 
+    transform: translateY(-50%);
   }
 `;
 
@@ -111,7 +110,7 @@ export const FormFilterItem = styled.div`
   gap: 10px;
 
   input {
-    &[type="date"] {
+    &[type='date'] {
       &::-webkit-calendar-picker-indicator {
         background: transparent;
         bottom: 0;
@@ -146,7 +145,7 @@ export const FormBooking = styled.form`
   width: fit-content;
 
   input {
-    &[type="date"] {
+    &[type='date'] {
       &::-webkit-calendar-picker-indicator {
         background: transparent;
         bottom: 0;
@@ -179,7 +178,6 @@ export const FormColumn = styled.div`
   flex-direction: column;
   gap: 20px;
 `;
-
 
 export const FormBookingItem = styled.div`
   position: relative;
@@ -221,7 +219,7 @@ export const NavSearch = styled.div`
   justify-content: center;
   background-color: var(--primary);
   padding: 10px 0;
-  height: 70px; 
+  height: 70px;
   align-items: center;
 
   div {

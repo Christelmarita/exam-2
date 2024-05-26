@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../utils/authContext";
-import useUserProfile from "../../hooks/profileHook";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../utils/authContext';
+import useUserProfile from '../../hooks/profileHook';
 import {
   NavContent,
   Nav,
   RightContent,
   Hamburger,
   MobileMenu,
-} from "./index.styles";
+} from './index.styles';
 
+/**
+ * Navigation component provides the navigation bar for the application,
+ * including links to different pages and user-specific options.
+ *
+ * @component
+ * @returns {JSX.Element}
+ */
 export default function Navigation() {
   const { user, logout } = useAuthContext();
   const { profileData, loading, error } = useUserProfile();
@@ -17,18 +24,28 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
+  /**
+   * Handles the scroll event to update the navigation bar style based on the scroll position.
+   *
+   * @function handleScroll
+   */
   const handleScroll = () => {
     const offset = window.scrollY;
     setScrolled(offset > 0);
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  /**
+   * Toggles the mobile menu open and close state.
+   *
+   * @function toggleMobileMenu
+   */
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -37,7 +54,7 @@ export default function Navigation() {
   if (error) return <div>Error loading profile data.</div>;
 
   return (
-    <Nav className={scrolled ? "scrolled" : ""}>
+    <Nav className={scrolled ? 'scrolled' : ''}>
       <NavContent>
         <Link to="/">
           <div className="logo-container">
@@ -93,7 +110,12 @@ export default function Navigation() {
                   <p>Profile</p>
                 </button>
               </Link>
-              <button onClick={() => { logout(navigate); toggleMobileMenu(); }}>
+              <button
+                onClick={() => {
+                  logout(navigate);
+                  toggleMobileMenu();
+                }}
+              >
                 <p>Log out</p>
               </button>
             </>

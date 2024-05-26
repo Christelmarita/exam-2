@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const VenueContainer = styled.div`
   margin-top: 5%;
@@ -63,7 +63,7 @@ export const VenueIcons = styled.div`
 `;
 
 export const VenueDescription = styled.div`
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 `;
 
 export const VenueOwner = styled.div`

@@ -1,14 +1,28 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { TotalPrice, FormBtnContainer, FormBooking, FormBookingItem, LoginPrompt } from "../index.styles";
-import BookBtn from "../../buttons/bookBtn";
-import { AuthContext } from "../../../utils/authContext";
-import useBooking from "../../../hooks/bookingHook";
-import { Link, useLocation } from "react-router-dom";
-import Message from "../../message";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import {
+  TotalPrice,
+  FormBtnContainer,
+  FormBooking,
+  FormBookingItem,
+  LoginPrompt,
+} from '../index.styles';
+import BookBtn from '../../buttons/bookBtn';
+import { AuthContext } from '../../../utils/authContext';
+import useBooking from '../../../hooks/bookingHook';
+import { Link, useLocation } from 'react-router-dom';
+import Message from '../../message';
 
+/**
+ * BookingForm component handles the booking form for a venue.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.venue
+ * @returns {JSX.Element}
+ */
 export default function BookingForm({ venue }) {
   const { user } = useContext(AuthContext);
   const location = useLocation();
@@ -64,13 +78,25 @@ export default function BookingForm({ venue }) {
         </FormBookingItem>
         <FormBookingItem>
           <TotalPrice>
-            <p>Per person, per night: <b>{venue.price} NOK</b></p>
-            <p>Total: <b>{totalPrice > 0 ? `${totalPrice} NOK` : 'Please select dates and number of guests'}</b></p>
+            <p>
+              Per person, per night: <b>{venue.price} NOK</b>
+            </p>
+            <p>
+              Total:{' '}
+              <b>
+                {totalPrice > 0
+                  ? `${totalPrice} NOK`
+                  : 'Please select dates and number of guests'}
+              </b>
+            </p>
           </TotalPrice>
           <FormBtnContainer>
             {user ? (
               message && message.success ? (
-                <Message message={message.message} onTimeout={() => setMessage(null)} />
+                <Message
+                  message={message.message}
+                  onTimeout={() => setMessage(null)}
+                />
               ) : (
                 <BookBtn type="submit" />
               )

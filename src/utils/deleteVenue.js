@@ -1,17 +1,28 @@
+/**
+ * Deletes a venue by its ID.
+ *
+ * @async
+ * @function deleteVenue
+ * @param {string} id
+ * @param {string} token
+ * @param {string} apiKey
+ * @returns {Promise<Response>}
+ */
+
 export default async function deleteVenue(id, token, apiKey) {
   const url = `https://v2.api.noroff.dev/holidaze/venues/${id}`;
 
   if (!token) {
-    console.error("User is not authenticated");
-    throw new Error("User is not authenticated");
+    console.error('User is not authenticated');
+    throw new Error('User is not authenticated');
   }
 
   const options = {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-      "X-Noroff-API-Key": apiKey,
+      'X-Noroff-API-Key': apiKey,
     },
   };
 
@@ -20,15 +31,15 @@ export default async function deleteVenue(id, token, apiKey) {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      console.error("Error response:", errorData);
+      console.error('Error response:', errorData);
       throw new Error(
-        `Failed to delete venue: ${errorData.message || "Unknown error"}`
+        `Failed to delete venue: ${errorData.message || 'Unknown error'}`
       );
     }
 
     return response;
   } catch (error) {
-    console.error("Fetch error:", error.message);
+    console.error('Fetch error:', error.message);
     throw error;
   }
 }

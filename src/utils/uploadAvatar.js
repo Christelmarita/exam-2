@@ -1,7 +1,23 @@
 import { userUrl } from './constants';
 
-export default async function uploadAvatar(token, apiKey, profileName, avatarUrl) {
+/**
+ * Updates the user's avatar by uploading a new avatar URL.
+ *
+ * @async
+ * @function uploadAvatar
+ * @param {string} token
+ * @param {string} apiKey
+ * @param {string} profileName
+ * @param {string} avatarUrl
+ * @returns {Promise<Object>}
+ */
 
+export default async function uploadAvatar(
+  token,
+  apiKey,
+  profileName,
+  avatarUrl
+) {
   const updatePayload = {
     avatar: {
       url: avatarUrl,
@@ -12,7 +28,7 @@ export default async function uploadAvatar(token, apiKey, profileName, avatarUrl
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       'X-Noroff-API-Key': apiKey,
     },
     body: JSON.stringify(updatePayload),

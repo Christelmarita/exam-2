@@ -1,43 +1,42 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FilterContainer = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const PageCardContainer = styled.div`
-margin-top: 30px;
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-gap: 20px;
-justify-content: center;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 `;
 
 export const FormContainer = styled.div`
-margin-top: 30px;
-display: flex;
-flex-direction: column;
-background-color: var(--primary);
-border-radius: 30px;
-padding: 30px;
-align-items: center;
-width: 100%;
-
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary);
+  border-radius: 30px;
+  padding: 30px;
+  align-items: center;
+  width: 100%;
 `;
 export const FormHeader = styled.div`
-width: 100%;
-max-width: 500px;
-h1{
-  margin: 10px 0;
-}
-span{
-  color: var(--detail);
-  cursor: pointer;
-  font-weight: 700;
-}
+  width: 100%;
+  max-width: 500px;
+  h1 {
+    margin: 10px 0;
+  }
+  span {
+    color: var(--detail);
+    cursor: pointer;
+    font-weight: 700;
+  }
 `;
 
 export const PageContainer = styled.div`
@@ -67,7 +66,7 @@ export const PageHeader = styled.div`
 export const HeroImage = styled.div`
   width: 100%;
   height: 100%;
-  background-image: url(${props => props.src});
+  background-image: url(${(props) => props.src});
   background-size: cover;
   background-position: center;
   position: relative;
@@ -75,7 +74,7 @@ export const HeroImage = styled.div`
   align-items: center;
   justify-content: center;
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -91,7 +90,7 @@ export const HeroText = styled.h1`
   color: var(--primary);
   font-size: 2rem;
   z-index: 1;
-  font-family: var(--headlineFont), sans-serif; 
+  font-family: var(--headlineFont), sans-serif;
   text-align: center;
   padding: 0 20px;
 `;

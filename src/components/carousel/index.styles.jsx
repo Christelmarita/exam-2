@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export const CarouselContainer = styled.div`
   width: 100%;
@@ -23,7 +23,6 @@ export const CarouselContainer = styled.div`
   .slick-dots {
     display: flex !important;
     justify-content: left;
-  
   }
 
   .slick-dots li {

@@ -1,6 +1,4 @@
-import styled from "styled-components";
-
-
+import styled from 'styled-components';
 
 export const Card = styled.div`
   width: 270px;
@@ -13,46 +11,44 @@ export const Card = styled.div`
   transition: box-shadow 0.3s ease;
 
   &:hover {
-    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.6); 
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.6);
     background: rgba(41, 126, 194, 0.3);
     border-radius: 0px;
   }
 
   @media (max-width: 578px) {
     width: 350px;
-    margin: 20px auto; 
+    margin: 20px auto;
   }
 `;
 
 export const Image = styled.div`
-position: relative;
+  position: relative;
 
-img{
-width: 100%;
-height: 170px;
-object-fit: cover;
-object-position: center;
-}
-
+  img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    object-position: center;
+  }
 `;
 
-
 export const CardBody = styled.div`
-padding: 10px;
+  padding: 10px;
 `;
 
 export const Text = styled.div`
-max-width: 100%;
-overflow: hidden;
-height: 100%;
-text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+  height: 100%;
+  text-overflow: ellipsis;
 
-p{
-  font-size: 0.8rem;
-  margin: 10px 0;
-  max-width: 90%;
-overflow: hidden;
-}
+  p {
+    font-size: 0.8rem;
+    margin: 10px 0;
+    max-width: 90%;
+    overflow: hidden;
+  }
 `;
 
 export const PageCardContainer = styled.div`

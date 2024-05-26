@@ -1,17 +1,15 @@
 import React from 'react';
-import Layout from "./components/layout";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import { AuthProvider } from "./utils/authContext.js";
-import "./index.css";
-import Home from "./pages/home";
-import Venue from "./pages/venue";
-import Profile from "./pages/profile";
-import Login from "./pages/login";
-import CreateAccount from "./pages/createaccount";
-import AddVenue from "./pages/addVenue";
+import Layout from './components/layout';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { AuthProvider } from './utils/authContext.js';
+import './index.css';
+import Home from './pages/home';
+import Venue from './pages/venue';
+import Profile from './pages/profile';
+import Login from './pages/login';
+import CreateAccount from './pages/createaccount';
+import AddVenue from './pages/addVenue';
 import EditVenueForm from './pages/editVenue';
-
-
 
 function App() {
   return (

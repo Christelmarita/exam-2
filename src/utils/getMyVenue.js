@@ -1,11 +1,19 @@
 import { venuesUrl } from './constants';
 
+/**
+ * Fetches details of a specific venue by its ID.
+ *
+ * @async
+ * @function getMyVenue
+ * @param {string} id
+ * @returns {Promise<Object>}
+ */
 const getMyVenue = async (id) => {
-  const response = await fetch(`${venuesUrl}/${id}`, { 
+  const response = await fetch(`${venuesUrl}/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      Authorization: `Bearer ${localStorage.getItem('authToken')}`,
     },
   });
 

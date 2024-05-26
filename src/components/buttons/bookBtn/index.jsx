@@ -1,8 +1,6 @@
-import React from "react";
-import {BtnBook} from "../index.styles";
+import React from 'react';
+import { BtnBook } from '../index.styles';
 
 export default function BookBtn() {
-  return (
-    <BtnBook>Book Stay</BtnBook>
-  );
+  return <BtnBook>Book Stay</BtnBook>;
 }

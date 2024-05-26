@@ -130,20 +130,20 @@ export const ButtonContainer = styled.div`
 `;
 
 export const EditBtn = styled.button`
-width: 150px;
-background-color: var(--detail);
-color: var(--primary);
-border: none;
-padding: 5px;
-margin: 10px 0;
-border-radius: 0px;
-cursor: pointer;
+  width: 150px;
+  background-color: var(--detail);
+  color: var(--primary);
+  border: none;
+  padding: 5px;
+  margin: 10px 0;
+  border-radius: 0px;
+  cursor: pointer;
 
-&:hover {
-  background-color: var(--third);
-  color: var(--lines);
-  border: 0.8px solid var(--lines);
-}
+  &:hover {
+    background-color: var(--third);
+    color: var(--lines);
+    border: 0.8px solid var(--lines);
+  }
 `;
 
 export const DeleteBtn = styled(EditBtn)`

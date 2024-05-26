@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledFooter = styled.footer`
   background-color: var(--detail);
@@ -10,7 +10,7 @@ export const StyledFooter = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; 
+  z-index: 1000;
   margin-top: 5%;
 `;
 

@@ -3,6 +3,12 @@ import { AuthContext } from '../../utils/authContext';
 import { userUrl } from '../../utils/constants';
 import { getApiKey } from '../../utils/getApiKey';
 
+/**
+ * Custom hook to fetch and manage the user profile data.
+ *
+ * @function useUserProfile
+ * @returns {Object}
+ */
 const useUserProfile = () => {
   const { user } = useContext(AuthContext);
   const [profileData, setProfileData] = useState(null);
@@ -18,13 +24,16 @@ const useUserProfile = () => {
       setLoading(true);
       try {
         const apiKey = await getApiKey(user.accessToken);
-        const response = await fetch(`${userUrl}${user.name}?_bookings=true&_venues=true`, {
-          headers: {
-            Authorization: `Bearer ${user.accessToken}`,
-            'Content-Type': 'application/json',
-            'X-Noroff-API-Key': apiKey,
-          },
-        });
+        const response = await fetch(
+          `${userUrl}${user.name}?_bookings=true&_venues=true`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.accessToken}`,
+              'Content-Type': 'application/json',
+              'X-Noroff-API-Key': apiKey,
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

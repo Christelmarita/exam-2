@@ -1,3 +1,12 @@
+/**
+ * Fetches details of a specific venue by its ID, including owner and bookings information.
+ *
+ * @async
+ * @function getMyVenue
+ * @param {string} id
+ * @returns {Promise<Object>}
+ */
+
 export default async function getMyVenue(id) {
   const url = `https://v2.api.noroff.dev/holidaze/venues/${id}?_owner=true&_bookings=true`;
   const options = {

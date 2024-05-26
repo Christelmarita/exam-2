@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Form,
   FormItem,
@@ -7,17 +7,17 @@ import {
   FormBtnContainer,
   FormGridContainer,
   FormColumn,
-} from "../index.styles";
-import FormBtn from "../../buttons/formBtn";
-import useForm from "../../../hooks/formHook";
-import useFetch from "../../../hooks/fetchHook";
-import { createVenueUrl } from "../../../utils/constants";
-import Message from "../../message"; 
+} from '../index.styles';
+import FormBtn from '../../buttons/formBtn';
+import useForm from '../../../hooks/formHook';
+import useFetch from '../../../hooks/fetchHook';
+import { createVenueUrl } from '../../../utils/constants';
+import Message from '../../message';
 
 const initialState = {
-  name: "",
-  description: "",
-  imageUrl: "",
+  name: '',
+  description: '',
+  imageUrl: '',
   price: 0,
   maxGuests: 0,
   amenities: {
@@ -26,12 +26,18 @@ const initialState = {
     wifi: false,
     pets: false,
   },
-  address: "",
-  city: "",
-  zip: "",
-  country: "",
+  address: '',
+  city: '',
+  zip: '',
+  country: '',
 };
 
+/**
+ * AddVenueForm component handles the form for adding a new venue.
+ *
+ * @component
+ * @returns {JSX.Element}
+ */
 const AddVenueForm = () => {
   const { performFetch, loading, error, data } = useFetch(createVenueUrl);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -42,7 +48,7 @@ const AddVenueForm = () => {
     const venueData = {
       name: formData.name,
       description: formData.description,
-      media: [{ url: formData.imageUrl, alt: "Venue image" }],
+      media: [{ url: formData.imageUrl, alt: 'Venue image' }],
       price: Number(formData.price),
       maxGuests: Number(formData.maxGuests),
       meta: formData.amenities,
@@ -55,7 +61,7 @@ const AddVenueForm = () => {
 
     try {
       await performFetch({
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(venueData),
       });
       setShowSuccess(true);
@@ -64,11 +70,14 @@ const AddVenueForm = () => {
     }
   };
 
-  const { formData, handleChange, handleSubmit } = useForm(initialState, onSubmit);
+  const { formData, handleChange, handleSubmit } = useForm(
+    initialState,
+    onSubmit
+  );
 
   const handleSuccessTimeout = () => {
     setShowSuccess(false);
-    navigate("/profile");
+    navigate('/profile');
   };
 
   const handleErrorTimeout = () => {

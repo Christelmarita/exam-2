@@ -1,11 +1,19 @@
 import { venuesUrl, queryOwner, queryBooking } from './constants';
 
+/**
+ * Fetches a list of venues with owner and booking information.
+ *
+ * @async
+ * @function getVenues
+ * @returns {Promise<Object[]>}
+ */
+
 export default async function getVenues() {
   const url = `${venuesUrl}/?${queryOwner}=true&${queryBooking}=true`;
   const options = {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   };
 

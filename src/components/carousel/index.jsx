@@ -1,8 +1,17 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import { CarouselContainer } from "./index.styles";
-import Slider from "react-slick";
+import { CarouselContainer } from './index.styles';
+import Slider from 'react-slick';
 
+/**
+ * VenueCarousel component displays a carousel of media items.
+ *
+ * @component
+ * @param {Object[]} media
+ * @param {string} media[].url
+ * @param {string} [media[].alt]
+ * @returns {JSX.Element}
+ */
 export default function VenueCarousel({ media }) {
   const settings = {
     dots: true,
@@ -15,14 +24,14 @@ export default function VenueCarousel({ media }) {
         <img src={media[i].url} alt={media[i].alt || `Thumbnail ${i}`} />
       </a>
     ),
-    dotsClass: "slick-dots custom-thumb"
+    dotsClass: 'slick-dots custom-thumb',
   };
 
   if (media.length === 1) {
     return (
       <CarouselContainer>
         <div>
-          <img src={media[0].url} alt={media[0].alt || "Venue Image"} />
+          <img src={media[0].url} alt={media[0].alt || 'Venue Image'} />
         </div>
       </CarouselContainer>
     );
@@ -42,8 +51,10 @@ export default function VenueCarousel({ media }) {
 }
 
 VenueCarousel.propTypes = {
-  media: PropTypes.arrayOf(PropTypes.shape({
-    url: PropTypes.string.isRequired,
-    alt: PropTypes.string
-  })).isRequired
+  media: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      alt: PropTypes.string,
+    })
+  ).isRequired,
 };

@@ -1,26 +1,54 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Form, FormItem, FormBtnContainer, FormItemCheckbox, ErrorMessage } from "../index.styles";
-import FormBtn from "../../buttons/formBtn";
-import useForm from "../../../hooks/formHook";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import {
+  Form,
+  FormItem,
+  FormBtnContainer,
+  FormItemCheckbox,
+  ErrorMessage,
+} from '../index.styles';
+import FormBtn from '../../buttons/formBtn';
+import useForm from '../../../hooks/formHook';
 
+/**
+ * AuthForm component handles the authentication form for registration and login.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.initialState
+ * @param {Function} props.handleSubmit
+ * @param {string} props.buttonText
+ * @returns {JSX.Element}
+ */
 const AuthForm = ({ initialState, handleSubmit: onSubmit, buttonText }) => {
-  const { formData, handleChange, handleSubmit } = useForm(initialState, onSubmit);
+  const { formData, handleChange, handleSubmit } = useForm(
+    initialState,
+    onSubmit
+  );
   const [errors, setErrors] = useState({});
 
+  /**
+   * Validates the form data.
+   *
+   * @function validate
+   * @returns {boolean}
+   */
   const validate = () => {
     const newErrors = {};
-    if ("name" in formData && !formData.name.trim()) {
-      newErrors.name = "Name is required.";
+    if ('name' in formData && !formData.name.trim()) {
+      newErrors.name = 'Name is required.';
     }
-    if (!formData.email.endsWith("@stud.noroff.no")) {
-      newErrors.email = "Email must be a stud.noroff.no email.";
+    if (!formData.email.endsWith('@stud.noroff.no')) {
+      newErrors.email = 'Email must be a stud.noroff.no email.';
     }
     if (!formData.password) {
-      newErrors.password = "Password is required.";
+      newErrors.password = 'Password is required.';
     }
-    if ("confirmPassword" in formData && formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match.";
+    if (
+      'confirmPassword' in formData &&
+      formData.password !== formData.confirmPassword
+    ) {
+      newErrors.confirmPassword = 'Passwords do not match.';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -35,7 +63,7 @@ const AuthForm = ({ initialState, handleSubmit: onSubmit, buttonText }) => {
 
   return (
     <Form onSubmit={handleFormSubmit}>
-      {"name" in formData && (
+      {'name' in formData && (
         <FormItem>
           <label htmlFor="name">Name</label>
           <input
@@ -70,7 +98,7 @@ const AuthForm = ({ initialState, handleSubmit: onSubmit, buttonText }) => {
         />
         {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
       </FormItem>
-      {"confirmPassword" in formData && (
+      {'confirmPassword' in formData && (
         <FormItem>
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
@@ -80,10 +108,12 @@ const AuthForm = ({ initialState, handleSubmit: onSubmit, buttonText }) => {
             onChange={handleChange}
             required
           />
-          {errors.confirmPassword && <ErrorMessage>{errors.confirmPassword}</ErrorMessage>}
+          {errors.confirmPassword && (
+            <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
+          )}
         </FormItem>
       )}
-      {"isVenueManager" in formData && (
+      {'isVenueManager' in formData && (
         <FormItemCheckbox>
           <input
             type="checkbox"
