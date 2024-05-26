@@ -32,8 +32,6 @@ export default function BookingForm({ venue }) {
     guests,
     totalPrice,
     excludeDates,
-    loading,
-    error,
     handleDateChange,
     handleGuestsChange,
     handleSubmit,

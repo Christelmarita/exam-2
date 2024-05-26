@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useUserProfile from '../../hooks/profileHook';
 import { useAuthContext } from '../../utils/authContext';
 import getMyVenue from '../../utils/getVenueBookings';
@@ -33,7 +33,7 @@ import Message from '../../components/message';
  * @returns {JSX.Element}
  */
 const Profile = () => {
-  const { profileData, loading, error, refetch } = useUserProfile();
+  const { profileData, loading, error } = useUserProfile(); 
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const [venuesWithBookings, setVenuesWithBookings] = useState([]);

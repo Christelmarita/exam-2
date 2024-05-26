@@ -20,7 +20,8 @@ export default function VenueCarousel({ media }) {
     slidesToShow: 1,
     slidesToScroll: 1,
     customPaging: (i) => (
-      <a>
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <a href="#">
         <img src={media[i].url} alt={media[i].alt || `Thumbnail ${i}`} />
       </a>
     ),
