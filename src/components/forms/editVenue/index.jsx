@@ -40,7 +40,6 @@ export default function EditVenueForm() {
         const response = await fetch(`${venuesUrl}/${venueId}`);
         if (response.ok) {
           const venueResponse = await response.json();
-          console.log("Fetched venue data:", venueResponse);
           const venue = venueResponse.data;
           
           setFormData({

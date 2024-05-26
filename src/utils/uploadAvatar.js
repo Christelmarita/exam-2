@@ -1,10 +1,6 @@
 import { userUrl } from './constants';
 
 export default async function uploadAvatar(token, apiKey, profileName, avatarUrl) {
-  console.log("Token:", token);
-  console.log("API Key:", apiKey);
-  console.log("Profile Name:", profileName);
-  console.log("Avatar URL:", avatarUrl);
 
   const updatePayload = {
     avatar: {

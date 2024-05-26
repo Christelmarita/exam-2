@@ -20,8 +20,6 @@ const RegisterForm = () => {
   const handleRegister = async (formData) => {
     const { name, email, password, confirmPassword, isVenueManager } = formData;
 
-    console.log("Form Data:", formData); // Log form data
-
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -34,7 +32,7 @@ const RegisterForm = () => {
         navigate("/login");
       }, 2000);
     } catch (error) {
-      console.error("Registration error:", error); // Log the error
+      console.error("Registration error:", error);
       setError(error.message);
     }
   };

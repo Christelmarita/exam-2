@@ -1,5 +1,3 @@
-// src/components/forms/searchForm/index.jsx
-
 import React from "react";
 import { FormSearch } from "../index.styles";
 import Icons from "../../../images";

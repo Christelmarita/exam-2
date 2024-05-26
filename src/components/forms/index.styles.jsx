@@ -83,7 +83,7 @@ export const FormSearch = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  margin: 5% auto;
   gap: 10px;
 
   img {
@@ -220,8 +220,8 @@ export const NavSearch = styled.div`
   display: flex;
   justify-content: center;
   background-color: var(--primary);
-  padding: 10px 0; /* Add padding to create space between NavContent and NavSearch */
-  height: 70px; /* Adjust height as needed */
+  padding: 10px 0;
+  height: 70px; 
   align-items: center;
 
   div {
@@ -231,8 +231,14 @@ export const NavSearch = styled.div`
 `;
 
 export const LoginPrompt = styled.p`
-  color: red;
+  color: var(--lines);
   text-align: center;
   font-weight: bold;
   margin-top: 1rem;
+`;
+
+export const ErrorMessage = styled.div`
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 `;

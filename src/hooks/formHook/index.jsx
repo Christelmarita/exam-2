@@ -7,8 +7,6 @@ const useForm = (initialState, callback) => {
     const { id, name, value, type, checked } = e.target;
     const key = id || name;
 
-    console.log(`Change detected: key=${key}, value=${value}, checked=${checked}, type=${type}`);
-
     setFormData((prev) => {
       if (type === "checkbox") {
         if (key.includes(".")) {

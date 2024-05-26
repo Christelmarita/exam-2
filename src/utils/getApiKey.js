@@ -1,7 +1,6 @@
 import { baseUrl } from './constants';
 
 export async function getApiKey(accessToken) {
-  console.log("Creating API key with access token:", accessToken);
   try {
     const response = await fetch(`${baseUrl}auth/create-api-key`, {
       method: "POST",

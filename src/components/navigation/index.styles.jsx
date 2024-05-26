@@ -5,7 +5,7 @@ export const Nav = styled.nav`
   height: 70px;
   background-color: var(--primary);
   display: flex;
-  justify-content: center; /* Center content horizontally */
+  justify-content: center;
   align-items: center;
   padding: 0 20px;
   position: fixed;
@@ -14,6 +14,10 @@ export const Nav = styled.nav`
   z-index: 1000;
   transition: box-shadow 0.3s ease;
   border-bottom: 0.8px solid rgba(0, 0, 0, 0.1);
+
+  p {
+    color: var(--detail);
+  }
 
   &.scrolled {
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
@@ -58,7 +62,7 @@ export const NavContent = styled.div`
 
 export const RightContent = styled.div`
   display: flex;
-  gap: 20px; /* Adjust gap as needed */
+  gap: 20px;
   align-items: center;
 
   button {

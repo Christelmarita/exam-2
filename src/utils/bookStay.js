@@ -21,10 +21,6 @@ export async function bookStay({ dateFrom, dateTo, guests, venueId, token }) {
     venueId,
   };
 
-  console.log("Booking request payload:", bookingPayload);
-  console.log("Authorization token:", token);
-  console.log("API key:", apiKey);
-
   try {
     const response = await fetch(`${bookingsUrl}`, {
       method: "POST",
@@ -37,7 +33,6 @@ export async function bookStay({ dateFrom, dateTo, guests, venueId, token }) {
     });
 
     const data = await response.json();
-    console.log("Booking API response:", data);
 
     if (!response.ok) {
       throw new Error(data.message || "Failed to make the booking");

@@ -27,6 +27,7 @@ import {
 } from './index.styles';
 import deleteVenue from '../../utils/deleteVenue';
 import uploadAvatar from '../../utils/uploadAvatar';
+import Message from '../../components/message';
 
 const Profile = () => {
   const { profileData, loading, error, refetch } = useUserProfile();
@@ -35,6 +36,8 @@ const Profile = () => {
   const [venuesWithBookings, setVenuesWithBookings] = useState([]);
   const [avatarUrl, setAvatarUrl] = useState('');
   const [uploadError, setUploadError] = useState('');
+  const [avatarSuccess, setAvatarSuccess] = useState(false);
+  const [deletedVenueId, setDeletedVenueId] = useState(null);
 
   useEffect(() => {
     const fetchVenuesWithBookings = async () => {
@@ -73,8 +76,10 @@ const Profile = () => {
       try {
         const response = await deleteVenue(id, user.accessToken, localStorage.getItem("apiKey"));
         if (response.ok) {
-          alert('Venue deleted successfully');
-          window.location.reload();
+          setDeletedVenueId(id);
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000); 
         }
       } catch (error) {
         alert(`Failed to delete venue: ${error.message}`);
@@ -88,19 +93,17 @@ const Profile = () => {
 
   const handleAvatarUpload = async () => {
     if (!avatarUrl) return;
-    setUploadError(''); // Clear previous error message
-    console.log("User Access Token:", user.accessToken);
-    console.log("Profile Name:", profileData.name);
-    console.log("Avatar URL:", avatarUrl);
+    setUploadError('');
     try {
       await uploadAvatar(user.accessToken, localStorage.getItem("apiKey"), profileData.name, avatarUrl);
-      alert('Avatar updated successfully');
-      window.location.reload(); // Reload the page
+      setAvatarSuccess(true);
+      setTimeout(() => {
+        window.location.reload(); 
+      }, 2000);
     } catch (error) {
       setUploadError(error.message);
     }
   };
-  
 
   return (
     <PageContainer>
@@ -116,7 +119,11 @@ const Profile = () => {
           </UserDetails>
         </UserInfo>
         <UploadInput type="text" placeholder="New Avatar URL" onChange={handleAvatarChange} />
-        <UploadButton onClick={handleAvatarUpload}>Upload New Avatar</UploadButton>
+        {avatarSuccess ? (
+          <Message message="Avatar updated successfully!" onTimeout={() => setAvatarSuccess(false)} />
+        ) : (
+          <UploadButton onClick={handleAvatarUpload}>Upload New Avatar</UploadButton>
+        )}
         {uploadError && <p style={{ color: 'red' }}>{uploadError}</p>}
 
         <Section>
@@ -160,27 +167,33 @@ const Profile = () => {
               venuesWithBookings.map((venue) => (
                 <ListWrap key={venue.id}>
                   <div>
-                    <h3>{venue.name}</h3>
-                    <ButtonContainer>
-                      <EditBtn onClick={() => handleEdit(venue.id)}>Edit Venue</EditBtn>
-                      <DeleteBtn onClick={() => handleDelete(venue.id)}>Delete Venue</DeleteBtn>
-                    </ButtonContainer>
-                    <ListGrid>
-                      <ListItem>
-                        <strong>Customer</strong>
-                        <strong>Dates</strong>
-                      </ListItem>
-                      {venue.bookings.length === 0 ? (
-                        <p>No bookings for this venue.</p>
-                      ) : (
-                        venue.bookings.map((booking) => (
-                          <ListItem key={booking.id}>
-                            <span>{booking.customer.name}</span>
-                            <span>{new Date(booking.dateFrom).toLocaleDateString()} - {new Date(booking.dateTo).toLocaleDateString()}</span>
+                    {deletedVenueId === venue.id ? (
+                      <Message message="Venue deleted successfully!" onTimeout={() => setDeletedVenueId(null)} />
+                    ) : (
+                      <>
+                        <h3>{venue.name}</h3>
+                        <ButtonContainer>
+                          <EditBtn onClick={() => handleEdit(venue.id)}>Edit Venue</EditBtn>
+                          <DeleteBtn onClick={() => handleDelete(venue.id)}>Delete Venue</DeleteBtn>
+                        </ButtonContainer>
+                        <ListGrid>
+                          <ListItem>
+                            <strong>Customer</strong>
+                            <strong>Dates</strong>
                           </ListItem>
-                        ))
-                      )}
-                    </ListGrid>
+                          {venue.bookings.length === 0 ? (
+                            <p>No bookings for this venue.</p>
+                          ) : (
+                            venue.bookings.map((booking) => (
+                              <ListItem key={booking.id}>
+                                <span>{booking.customer.name}</span>
+                                <span>{new Date(booking.dateFrom).toLocaleDateString()} - {new Date(booking.dateTo).toLocaleDateString()}</span>
+                              </ListItem>
+                            ))
+                          )}
+                        </ListGrid>
+                      </>
+                    )}
                   </div>
                 </ListWrap>
               ))

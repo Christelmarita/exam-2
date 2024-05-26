@@ -12,7 +12,6 @@ const Message = ({ message, onTimeout, type = 'success', timeout = 2000 }) => {
 
   const messageStyle = {
     color: type === 'success' ? 'green' : 'red',
-    fontWeight: 'bold',
   };
 
   return <div style={messageStyle}>{message}</div>;

@@ -18,11 +18,6 @@ const useUserProfile = () => {
       setLoading(true);
       try {
         const apiKey = await getApiKey(user.accessToken);
-
-        console.log('Fetching profile for user:', user.name);
-        console.log('Using access token:', user.accessToken);
-        console.log('Using API key:', apiKey);
-
         const response = await fetch(`${userUrl}${user.name}?_bookings=true&_venues=true`, {
           headers: {
             Authorization: `Bearer ${user.accessToken}`,
@@ -36,7 +31,6 @@ const useUserProfile = () => {
         }
 
         const data = await response.json();
-        console.log('User profile data:', data);
         setProfileData(data.data);
       } catch (error) {
         console.error('Error fetching user profile:', error);

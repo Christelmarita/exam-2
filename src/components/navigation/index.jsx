@@ -33,7 +33,7 @@ export default function Navigation() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  if (loading) return null; // Or a loading spinner
+  if (loading) return null;
   if (error) return <div>Error loading profile data.</div>;
 
   return (

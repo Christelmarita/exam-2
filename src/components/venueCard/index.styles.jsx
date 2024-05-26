@@ -19,7 +19,7 @@ export const Card = styled.div`
   }
 
   @media (max-width: 578px) {
-    width: 325px;
+    width: 350px;
     margin: 20px auto; 
   }
 `;

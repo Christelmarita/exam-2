@@ -4,9 +4,8 @@
   --primary: #fff;
   --secondary: #287ABD;
   --third: rgb(255, 239, 217);
-  --icons: #0e3555;
+  --lines: #0e3555;
   --detail: #B65907;
-  --lines: #15171f;
 
   --headlineFont: 'Archivo Black', sans-serif;
   --primaryFont: 'Nunito Sans', sans-serif;
@@ -23,7 +22,7 @@ body {
     font-family: var(--primaryFont);
   margin: 0;
   padding-top: 120px;
-  color: var(--icons);
+  color: var(--lines);
     font-size: 16px;
   }
   
@@ -35,12 +34,12 @@ body {
 button {
   border: none;
   background-color: transparent;
-  color: var(--icons);
+  color: var(--lines);
   font-family: var(--primaryFont);
 }
 a {
   text-decoration: none;
-  color: var(--icons);
+  color: var(--lines);
 }
 
 b {

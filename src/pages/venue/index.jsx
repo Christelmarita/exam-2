@@ -57,7 +57,7 @@ export default function Venue() {
             <VenueDescription>
               <p>{venue.description}</p>
             </VenueDescription>
-            <h2>Amenneties</h2>
+            <h2>Ameneties</h2>
             <VenueIcons>
               {venue.meta.wifi && <Icons.Wifi />}
               {venue.meta.parking && <Icons.Parking />}

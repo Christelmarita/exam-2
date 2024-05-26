@@ -64,8 +64,6 @@ const useBooking = (venue) => {
       venueId: venue.id,
     };
 
-    console.log("Submitting booking data:", bookingPayload);
-
     try {
       await performFetch({
         method: "POST",
@@ -74,7 +72,6 @@ const useBooking = (venue) => {
           token: user.accessToken,
         }),
       });
-      console.log("Booking successful:", data);
       return { success: true, message: "Booking successful!" };
     } catch (error) {
       console.error("Failed to make the booking:", error.message);

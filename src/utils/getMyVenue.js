@@ -1,7 +1,6 @@
 import { venuesUrl } from './constants';
 
 const getMyVenue = async (id) => {
-  console.log('getMyVenue called with id:', id);
   const response = await fetch(`${venuesUrl}/${id}`, { 
     method: 'GET',
     headers: {
@@ -17,7 +16,6 @@ const getMyVenue = async (id) => {
   }
 
   const result = await response.json();
-  console.log('Fetched venue data:', result);
   return result;
 };
 
