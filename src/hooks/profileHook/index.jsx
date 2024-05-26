@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { AuthContext } from '../../utils/authContext';
 import { userUrl } from '../../utils/constants';
 import { getApiKey } from '../../utils/getApiKey';
@@ -15,44 +15,44 @@ const useUserProfile = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      if (!user || !user.accessToken) {
-        return;
-      }
+  const fetchUserProfile = useCallback(async () => {
+    if (!user || !user.accessToken) {
+      return;
+    }
 
-      setLoading(true);
-      try {
-        const apiKey = await getApiKey(user.accessToken);
-        const response = await fetch(
-          `${userUrl}${user.name}?_bookings=true&_venues=true`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.accessToken}`,
-              'Content-Type': 'application/json',
-              'X-Noroff-API-Key': apiKey,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+    setLoading(true);
+    try {
+      const apiKey = await getApiKey(user.accessToken);
+      const response = await fetch(
+        `${userUrl}${user.name}?_bookings=true&_venues=true`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+            'Content-Type': 'application/json',
+            'X-Noroff-API-Key': apiKey,
+          },
         }
+      );
 
-        const data = await response.json();
-        setProfileData(data.data);
-      } catch (error) {
-        console.error('Error fetching user profile:', error);
-        setError(error);
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    };
 
-    fetchUserProfile();
+      const data = await response.json();
+      setProfileData(data.data);
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
   }, [user]);
 
-  return { profileData, loading, error };
+  useEffect(() => {
+    fetchUserProfile();
+  }, [fetchUserProfile]);
+
+  return { profileData, loading, error, refetch: fetchUserProfile };
 };
 
 export default useUserProfile;

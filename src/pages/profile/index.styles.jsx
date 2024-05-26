@@ -166,10 +166,11 @@ export const UploadButton = styled.button`
   background-color: var(--secondary);
   color: var(--primary);
   padding: 5px 10px;
-  border-radius: 5px;
   cursor: pointer;
 
   &:hover {
-    background-color: var(--detail);
+    background-color: var(--third);
+    color: var(--lines);
+    border: 0.5px solid var(--lines);
   }
 `;
