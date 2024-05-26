@@ -33,7 +33,7 @@ import Message from '../../components/message';
  * @returns {JSX.Element}
  */
 const Profile = () => {
-  const { profileData, loading, error } = useUserProfile(); 
+  const { profileData, loading, error, refetch } = useUserProfile();
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const [venuesWithBookings, setVenuesWithBookings] = useState([]);
@@ -97,9 +97,7 @@ const Profile = () => {
         );
         if (response.ok) {
           setDeletedVenueId(id);
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+          refetch(); 
         }
       } catch (error) {
         alert(`Failed to delete venue: ${error.message}`);
@@ -132,9 +130,7 @@ const Profile = () => {
         avatarUrl
       );
       setAvatarSuccess(true);
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      refetch(); 
     } catch (error) {
       setUploadError(error.message);
     }
