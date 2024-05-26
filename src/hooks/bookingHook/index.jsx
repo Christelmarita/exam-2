@@ -50,13 +50,11 @@ const useBooking = (venue) => {
   const handleSubmit = async (e, user) => {
     e.preventDefault();
     if (!user) {
-      alert("You need to be logged in to make a booking.");
-      return;
+      return { success: false, message: "You need to be logged in to make a booking." };
     }
 
     if (!startDate || !endDate) {
-      alert("Please select check-in and check-out dates.");
-      return;
+      return { success: false, message: "Please select check-in and check-out dates." };
     }
 
     const bookingPayload = {
@@ -77,10 +75,10 @@ const useBooking = (venue) => {
         }),
       });
       console.log("Booking successful:", data);
-      alert("Booking successful!");
+      return { success: true, message: "Booking successful!" };
     } catch (error) {
       console.error("Failed to make the booking:", error.message);
-      alert(`Failed to make the booking: ${error.message}`);
+      return { success: false, message: `Failed to make the booking: ${error.message}` };
     }
   };
 

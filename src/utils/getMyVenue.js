@@ -1,8 +1,8 @@
 import { venuesUrl } from './constants';
 
 const getMyVenue = async (id) => {
-  console.log('getMyVenue called with id:', id); // Log the function call with the venue id
-  const response = await fetch(`${venuesUrl}/${id}`, { // Ensure the correct endpoint
+  console.log('getMyVenue called with id:', id);
+  const response = await fetch(`${venuesUrl}/${id}`, { 
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -12,12 +12,12 @@ const getMyVenue = async (id) => {
 
   if (!response.ok) {
     const errorData = await response.json();
-    console.error('Error response:', errorData); // Log error response
+    console.error('Error response:', errorData);
     throw new Error(errorData.message || 'Failed to fetch venue bookings');
   }
 
   const result = await response.json();
-  console.log('Fetched venue data:', result); // Log fetched venue data
+  console.log('Fetched venue data:', result);
   return result;
 };
 

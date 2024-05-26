@@ -61,7 +61,7 @@ const AuthForm = ({ initialState, handleSubmit: onSubmit, buttonText }) => {
             checked={formData.isVenueManager}
             onChange={handleChange}
           />
-          <label htmlFor="isVenueManager">Register as a Venue Manager</label>
+          <label htmlFor="isVenueManager">Register as Venue Manager</label>
         </FormItemCheckbox>
       )}
       <FormBtnContainer>

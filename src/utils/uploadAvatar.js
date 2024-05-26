@@ -26,7 +26,7 @@ export default async function uploadAvatar(token, apiKey, profileName, avatarUrl
     const response = await fetch(`${userUrl}${profileName}`, options);
     if (!response.ok) {
       const errorData = await response.json();
-      console.error('Error Data:', errorData); // Log the error data
+      console.error('Error Data:', errorData);
       throw new Error(errorData.message || 'Failed to update avatar');
     }
     return response.json();

@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { TotalPrice, FormBtnContainer, FormBooking, FormBookingItem, LoginPrompt } from "../index.styles"; // Import the new style
+import { TotalPrice, FormBtnContainer, FormBooking, FormBookingItem, LoginPrompt } from "../index.styles";
 import BookBtn from "../../buttons/bookBtn";
 import { AuthContext } from "../../../utils/authContext";
 import useBooking from "../../../hooks/bookingHook";
-import { Link, useLocation } from "react-router-dom"; // Import Link and useLocation
+import { Link, useLocation } from "react-router-dom";
+import Message from "../../message";
 
 export default function BookingForm({ venue }) {
   const { user } = useContext(AuthContext);
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
   const {
     startDate,
     endDate,
@@ -24,9 +25,21 @@ export default function BookingForm({ venue }) {
     handleSubmit,
   } = useBooking(venue);
 
+  const [message, setMessage] = useState(null);
+
+  const handleBookingSubmit = async (e) => {
+    const result = await handleSubmit(e, user);
+    setMessage(result);
+    if (result.success) {
+      setTimeout(() => {
+        setMessage(null);
+      }, 2000);
+    }
+  };
+
   return (
     <>
-      <FormBooking onSubmit={(e) => handleSubmit(e, user)}>
+      <FormBooking onSubmit={handleBookingSubmit}>
         <FormBookingItem>
           <label htmlFor="dateRange">Check-in and check-out dates:</label>
           <DatePicker
@@ -56,7 +69,11 @@ export default function BookingForm({ venue }) {
           </TotalPrice>
           <FormBtnContainer>
             {user ? (
-              <BookBtn type="submit" />
+              message && message.success ? (
+                <Message message={message.message} onTimeout={() => setMessage(null)} />
+              ) : (
+                <BookBtn type="submit" />
+              )
             ) : (
               <LoginPrompt>
                 <Link to="/login" state={{ from: location.pathname }}>
@@ -67,8 +84,6 @@ export default function BookingForm({ venue }) {
           </FormBtnContainer>
         </FormBookingItem>
       </FormBooking>
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
     </>
   );
 }

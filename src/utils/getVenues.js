@@ -1,5 +1,3 @@
-// src/utils/getVenues.js
-
 import { venuesUrl, queryOwner, queryBooking } from './constants';
 
 export default async function getVenues() {

@@ -1,9 +1,7 @@
-// src/components/venueCard/index.jsx
-
 import React, { useState, useEffect } from "react";
 import getVenues from "../../utils/getVenues";
 import Loader from "../loader";
-import { Text, CardBody, Card, Image } from "./index.styles";
+import { Text, CardBody, Card, Image, ErrorMessage } from "./index.styles";
 import Icons from "../../images";
 import { Link } from "react-router-dom";
 
@@ -18,7 +16,7 @@ export default function VenueCard({ searchQuery }) {
         const data = await getVenues();
         setVenues(data);
       } catch (error) {
-        setError("Failed to fetch venues");
+        setError("Cannot find any venues. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -38,7 +36,7 @@ export default function VenueCard({ searchQuery }) {
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <ErrorMessage>{error}</ErrorMessage>;
   }
 
   return (

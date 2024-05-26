@@ -65,3 +65,12 @@ export const PageCardContainer = styled.div`
     grid-template-columns: repeat(5, 1fr);
   }
 `;
+
+export const ErrorMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: red;
+  font-size: 1.5rem;
+`;

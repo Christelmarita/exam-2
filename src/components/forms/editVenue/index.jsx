@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Form, FormItem, FormItemCheckbox, FormBtnContainer, FormGridContainer, FormColumn } from "../index.styles";
 import FormBtn from "../../buttons/formBtn";
 import { venuesUrl } from "../../../utils/constants";
 import useFetch from "../../../hooks/fetchHook";
+import Message from "../../message";
 
 export default function EditVenueForm() {
   const { venueId } = useParams();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -27,7 +29,7 @@ export default function EditVenueForm() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
+  const [message, setMessage] = useState(null);
 
   const { performFetch } = useFetch(`${venuesUrl}/${venueId}`);
 
@@ -39,7 +41,7 @@ export default function EditVenueForm() {
         if (response.ok) {
           const venueResponse = await response.json();
           console.log("Fetched venue data:", venueResponse);
-          const venue = venueResponse.data; // Adjust this line to match the response structure
+          const venue = venueResponse.data;
           
           setFormData({
             name: venue.name,
@@ -68,10 +70,6 @@ export default function EditVenueForm() {
     }
   }, [venueId]);
 
-  useEffect(() => {
-    console.log("Form data updated:", formData); // Log form data updates
-  }, [formData]);
-
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
     if (type === "checkbox") {
@@ -94,7 +92,7 @@ export default function EditVenueForm() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setSuccess(false);
+    setMessage(null);
   
     const venueData = {
       name: formData.name,
@@ -116,10 +114,13 @@ export default function EditVenueForm() {
         method: "PUT",
         body: JSON.stringify(venueData),
       });
-      setSuccess(true);
+      setMessage({ success: true, message: "Venue updated successfully!" });
+      setTimeout(() => {
+        navigate("/profile");
+      }, 2000);
     } catch (error) {
       console.error("Error:", error);
-      setError(error.message);
+      setMessage({ success: false, message: error.message });
     } finally {
       setLoading(false);
     }
@@ -189,11 +190,12 @@ export default function EditVenueForm() {
           </FormItemCheckbox>
         </FormGridContainer>
         <FormBtnContainer>
-          <FormBtn text="Update Venue" type="submit" />
+          {message ? (
+            <Message message={message.message} onTimeout={() => setMessage(null)} type={message.success ? 'success' : 'error'} />
+          ) : (
+            <FormBtn text="Update Venue" type="submit" />
+          )}
         </FormBtnContainer>
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {error}</p>}
-        {success && <p>Venue updated successfully!</p>}
       </Form>
     </div>
   );

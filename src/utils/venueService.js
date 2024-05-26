@@ -1,4 +1,3 @@
-// src/utils/venueService.js
 import { venuesUrl } from "./constants";
 
 export const createVenue = async (venueData, token) => {

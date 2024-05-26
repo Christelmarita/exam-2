@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../authForm";
 import { register as registerUserService } from "../../../utils/authService";
+import Message from "../../message";
 
 const initialRegisterState = {
   name: "",
@@ -13,28 +14,44 @@ const initialRegisterState = {
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleRegister = async (formData) => {
     const { name, email, password, confirmPassword, isVenueManager } = formData;
+
+    console.log("Form Data:", formData); // Log form data
+
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      setError("Passwords do not match");
       return;
     }
     try {
       await registerUserService(name, email, password, isVenueManager);
-      alert("Registration successful! Please log in.");
-      navigate("/login");
+      setMessage({ success: true, message: "Registration successful! Redirecting to login..." });
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
-      alert(error.message);
+      console.error("Registration error:", error); // Log the error
+      setError(error.message);
     }
   };
 
   return (
-    <AuthForm
-      initialState={initialRegisterState}
-      handleSubmit={handleRegister}
-      buttonText="Register"
-    />
+    <>
+      {message && message.success ? (
+        <Message message={message.message} onTimeout={() => {}} type="success" />
+      ) : (
+        <AuthForm
+          initialState={initialRegisterState}
+          handleSubmit={handleRegister}
+          buttonText="Register"
+        />
+      )}
+      {error && <Message message={error} onTimeout={() => setError(null)} type="error" />}
+    </>
   );
 };
 
