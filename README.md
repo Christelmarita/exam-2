@@ -11,7 +11,7 @@ This project was to demonstrate the culmination of the skills acquired over the 
 
 ### User Authentication
 
-- **Register:** Users with a stud.noroff.no email can register book a venue.
+- **Register:** Users with a stud.noroff.no email can register and book a venue.
 - **Register as venue manager:** Users with a stud.noroff.no email can also register as a venue manager to create venues and manage bookings.
 - **Login/Logout:** Registered users can securely log in and out of their accounts.
 
