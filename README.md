@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# Holidaze
+![image](https://github.com/Christelmarita/exam-2/assets/114878235/7d6f938d-29c9-4476-bde4-b725f638aee1)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Exam 2 during my second year as a Front End student at Noroff.
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+This project was to demonstrate the culmination of the skills acquired over the past two years at Noroff. The brief was to create a venue booking and managing app.
 
-### `npm start`
+## Project Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### User Authentication
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Register:** Users with a stud.noroff.no email can register book a venue.
+- **Register as venue manager:** Users with a stud.noroff.no email can also register as a venue manager to create venues and manage bookings.
+- **Login/Logout:** Registered users can securely log in and out of their accounts.
 
-### `npm test`
+### User Profile
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Avatar Update:** Registered users have the option to update their profile avatars.
+- **View booking and venues:** Registered users can view their upcoming bookings. Those who are registered venue managers can also see and manage bookings at their venues.
+- **Search Listings:** Unregistered users can search and browse through available listings.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## API Integration
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The project integrates with the Noroff API.The API handles the backend functionalities.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Built with
 
-### `npm run eject`
+- HTML
+- CSS
+- [React.js](https://reactjs.org/)
+- [Bootstrap](https://getbootstrap.com)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Getting Started
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installing
+1. Clone the repo:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+git clone git@github.com:Christelmarita/exam-2.git
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. Install the dependencies:
 
-## Learn More
+```
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Running
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To run the app, run the following commands:
 
-### Code Splitting
+```bash
+npm run start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Contributing
 
-### Analyzing the Bundle Size
+Contribute by opening a pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Contact
 
-### Making a Progressive Web App
+[My LinkedIn page](https://www.linkedin.com/in/christelosterboe/)
+[Email](christel.marita@onibodesign.no)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Acknowledgments
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Noroff:** Special appreciation to Noroff for providing the API and invaluable guidance in past courses.
